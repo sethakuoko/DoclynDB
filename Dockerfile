@@ -3,6 +3,11 @@ FROM openjdk:24-jdk-slim as build
 
 WORKDIR /app
 COPY . .
+
+# ✅ Give executable permission to mvnw
+RUN chmod +x ./mvnw
+
+# 🏗️ Build the project without tests
 RUN ./mvnw clean package -DskipTests
 
 # Stage 2: Run the compiled JAR in a smaller image
